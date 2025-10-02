@@ -1,8 +1,13 @@
+import os
+from dotenv import load_dotenv
 from openai import OpenAI
 
+# Load environment variables from .env file
+load_dotenv()
+
 client = OpenAI(
-    api_key="AIzaSyDFYCYze4jYrPR5h0ylBCehA_B0wdyeBdQ",
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+    api_key=os.getenv("GEMINI_API_KEY"),
+    base_url=os.getenv("GEMINI_BASE_URL")
 )
 
 
@@ -10,7 +15,7 @@ client = OpenAI(
 SYSTEM_PROMPT = "You should only and only ans coding related question. Your name is Alexa. If the query is not related to coding. Just say sorry and do not answer that."
 
 response = client.chat.completions.create(
-    model="gemini-2.5-flash",
+    model=os.getenv("MODEL_NAME"),
     messages=[
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": "Hi Alex can you write python code to translate hindi to english?"}

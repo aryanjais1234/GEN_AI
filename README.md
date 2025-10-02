@@ -193,20 +193,54 @@ Reference guide for different prompt formats:
    ```
 
 3. **Install dependencies:**
+
    ```bash
-   pip install openai
+   pip install -r requirements.txt
+   ```
+
+   _Or install individually:_
+
+   ```bash
+   pip install openai python-dotenv
    ```
 
 ### 🔑 API Configuration
 
-Replace the API key in each Python file with your own:
+**🔒 IMPORTANT: Secure API Configuration**
 
-```python
-client = OpenAI(
-    api_key="YOUR_GEMINI_API_KEY_HERE",
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
-)
-```
+This project uses environment variables to keep your API keys secure and prevent them from being accidentally committed to version control.
+
+1. **Create a `.env` file in the root directory:**
+
+   ```bash
+   # Copy the example and add your API key
+   cp .env.example .env
+   ```
+
+2. **Add your Gemini API key to `.env`:**
+
+   ```env
+   # Environment Variables for GenAI Project
+   # DO NOT COMMIT THIS FILE TO VERSION CONTROL
+
+   # Google Gemini API Configuration
+   GEMINI_API_KEY=your_actual_api_key_here
+   GEMINI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
+
+   # Other Configuration
+   MODEL_NAME=gemini-2.5-flash
+   ```
+
+3. **Get your Gemini API key:**
+   - Visit [Google AI Studio](https://makersuite.google.com/)
+   - Create an account and generate an API key
+   - Replace `your_actual_api_key_here` with your actual API key
+
+**🛡️ Security Features:**
+
+- ✅ `.env` file is in `.gitignore` - won't be committed to GitHub
+- ✅ API keys loaded from environment variables
+- ✅ No hardcoded secrets in source code
 
 ---
 
@@ -327,7 +361,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🙋‍♂️ Author
 
-**Aryan Jais** - [@aryanjais1234](https://github.com/aryanjais1234)
+**Aryan Jaiswal** - [@aryanjais1234](https://github.com/aryanjais1234)
 
 ---
 

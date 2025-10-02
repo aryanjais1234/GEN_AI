@@ -1,10 +1,16 @@
 # Chain of Thaught (CoT) Prompting: Providing a series of examples to guide the model's reasoning process.
 
-from openai import OpenAI
+import os
 import json
+from dotenv import load_dotenv
+from openai import OpenAI
+
+# Load environment variables from .env file
+load_dotenv()
+
 client = OpenAI(
-    api_key="AIzaSyDFYCYze4jYrPR5h0ylBCehA_B0wdyeBdQ",
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+    api_key=os.getenv("GEMINI_API_KEY"),
+    base_url=os.getenv("GEMINI_BASE_URL")
 )
 
 SYSTEM_PROMPT = """
@@ -45,7 +51,7 @@ message_history.append({"role": "user", "content": user_query})
 
 while True:
   response = client.chat.completions.create(
-    model="gemini-2.5-flash",
+    model=os.getenv("MODEL_NAME"),
     response_format={"type":"json_object"},
     messages=message_history
   )

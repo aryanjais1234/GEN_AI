@@ -1,10 +1,15 @@
 # Few Short Prompting: Providing a few examples to guide the model's response.
 
+import os
+from dotenv import load_dotenv
 from openai import OpenAI
 
+# Load environment variables from .env file
+load_dotenv()
+
 client = OpenAI(
-    api_key="AIzaSyDFYCYze4jYrPR5h0ylBCehA_B0wdyeBdQ",
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+    api_key=os.getenv("GEMINI_API_KEY"),
+    base_url=os.getenv("GEMINI_BASE_URL")
 )
 
 
@@ -32,7 +37,7 @@ return a + b", "isCodingQuestion": true}}
 """
 
 response = client.chat.completions.create(
-    model="gemini-2.5-flash",
+    model=os.getenv("MODEL_NAME"),
     messages=[
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": "write a code to add n number in js"}
